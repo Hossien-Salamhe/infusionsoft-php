@@ -79,6 +79,8 @@ class Infusionsoft
      */
     protected $token;
 
+    protected $personal_access_token;
+
     /**
      * @param array $config
      */
@@ -98,6 +100,11 @@ class Infusionsoft
 
         if (isset($config['debug'])) {
             $this->debug = $config['debug'];
+        }
+        if (isset($config['pesonal_access_token'])) {
+            $this->personal_access_token = $config['pesonal_access_token'];
+        } else {
+            $this->personal_access_token = config('infusionsoft.personal_access_token');
         }
     }
 
@@ -249,7 +256,7 @@ class Infusionsoft
             'scope'         => 'full'
         );
 
-        if ( ! is_null($state) && $state !== null && is_string($state)) {
+        if (!is_null($state) && $state !== null && is_string($state)) {
             $params['state'] = (string)$state;
         }
 
@@ -289,7 +296,7 @@ class Infusionsoft
      */
     public function getHttpClient()
     {
-        if ( ! $this->httpClient) {
+        if (!$this->httpClient) {
             return new Http\GuzzleHttpClient($this->debug, $this->getHttpLogAdapter());
         }
 
@@ -314,8 +321,11 @@ class Infusionsoft
 
         $client = $this->getHttpClient();
 
-        $tokenInfo = $client->call('POST', $this->tokenUri,
-            ['body' => http_build_query($params), 'headers' => $headers]);
+        $tokenInfo = $client->call(
+            'POST',
+            $this->tokenUri,
+            ['body' => http_build_query($params), 'headers' => $headers]
+        );
 
         $this->setToken(new Token(json_decode($tokenInfo, true)));
 
@@ -338,6 +348,23 @@ class Infusionsoft
         $this->token = $token;
     }
 
+
+    /**
+     * @return Token
+     */
+    public function getPersonalAccessToken()
+    {
+        return $this->personal_access_token;
+    }
+
+    /**
+     * @param Token $token
+     */
+    public function setPersonalAccessToken($personal_access_token)
+    {
+        $this->personal_access_token = $personal_access_token;
+    }
+
     /**
      * @param Http\ClientInterface $client
      */
@@ -351,7 +378,7 @@ class Infusionsoft
      */
     public function getSerializer()
     {
-        if ( ! $this->serializer) {
+        if (!$this->serializer) {
             return new Http\InfusionsoftSerializer();
         }
 
@@ -372,7 +399,7 @@ class Infusionsoft
     public function getHttpLogAdapter()
     {
         // If a log adapter hasn't been set, we default to the null adapter
-        if ( ! $this->httpLogAdapter) {
+        if (!$this->httpLogAdapter) {
             $this->httpLogAdapter = new ArrayLogger();
         }
 
@@ -396,12 +423,12 @@ class Infusionsoft
      */
     public function getLogs()
     {
-        if ( ! $this->debug) {
+        if (!$this->debug) {
             return array();
         }
 
         $logger = $this->getHttpLogAdapter();
-        if ( ! $logger instanceof ArrayLogger) {
+        if (!$logger instanceof ArrayLogger) {
             return array();
         }
 
@@ -417,7 +444,7 @@ class Infusionsoft
     {
         $token = $this->getToken();
 
-        if ( ! is_object($token)) {
+        if (!is_object($token)) {
             return true;
         }
 
@@ -470,24 +497,25 @@ class Infusionsoft
     {
         // Before making the request, we can make sure that the token is still
         // valid by doing a check on the end of life.
-        $token = $this->getToken();
-        if ($this->isTokenExpired()) {
-            throw new TokenExpiredException;
-        }
+        // $token = $this->getToken();
+        // if ($this->isTokenExpired()) {
+        //     throw new TokenExpiredException;
+        // }
 
         $client      = $this->getHttpClient();
         $full_params = [];
 
         if (strtolower($method) === 'get' || strtolower($method) === 'delete') {
-            $params = array_merge(array('access_token' => $token->getAccessToken()), $params);
-            $url    = $url . '?' . http_build_query($params);
+            // $params = array_merge(array('access_token' => $token->getAccessToken()), $params);
+            // $url    = $url . '?' . http_build_query($params);
         } else {
-            $url                 = $url . '?' . http_build_query(array('access_token' => $token->getAccessToken()));
+            // $url                 = $url . '?' . http_build_query(array('access_token' => $token->getAccessToken()));
             $full_params['body'] = json_encode($params);
         }
 
         $full_params['headers'] = array(
             'Content-Type' => 'application/json',
+            'X-Keap-API-Key' => $this->getPersonalAccessToken(),
         );
 
         $response = (string)$client->call($method, $url, $full_params);
@@ -515,7 +543,7 @@ class Infusionsoft
      */
     public function formatDate($datetime = 'now')
     {
-        if ( ! $datetime instanceof \DateTime) {
+        if (!$datetime instanceof \DateTime) {
             $datetime = new \DateTime($datetime, new \DateTimeZone('America/New_York'));
         }
 
@@ -787,13 +815,13 @@ class Infusionsoft
         return $this->getRestApi('CampaignService');
     }
 
-	/**
-	 * @return \Infusionsoft\Api\Rest\CampaignService
-	 */
-	public function companies()
-	{
-		return $this->getRestApi('CompanyService');
-	}
+    /**
+     * @return \Infusionsoft\Api\Rest\CampaignService
+     */
+    public function companies()
+    {
+        return $this->getRestApi('CompanyService');
+    }
 
     /**
      * @return \Infusionsoft\Api\Rest\UserInfoService
@@ -831,7 +859,7 @@ class Infusionsoft
     {
         $class = '\Infusionsoft\Api\\' . $class;
 
-        if ( ! array_key_exists($class, $this->apis)) {
+        if (!array_key_exists($class, $this->apis)) {
             $this->apis[$class] = new $class($this);
         }
 
@@ -852,6 +880,4 @@ class Infusionsoft
 
         return new $class($this);
     }
-
 }
-
