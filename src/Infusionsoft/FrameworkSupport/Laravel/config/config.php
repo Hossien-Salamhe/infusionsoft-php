@@ -12,6 +12,8 @@ return array(
 
 	'clientSecret' => env('INFUSIONSOFT_SECRET'),
 
+	'personalAccessToken' => env('INFUSIONSOFT_PERSONAL_ACCESS_TOKEN'),
+
 	'redirectUri' => env('INFUSIONSOFT_REDIRECT_URL'),
 
 );

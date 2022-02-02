@@ -101,10 +101,10 @@ class Infusionsoft
         if (isset($config['debug'])) {
             $this->debug = $config['debug'];
         }
-        if (isset($config['pesonal_access_token'])) {
-            $this->personal_access_token = $config['pesonal_access_token'];
+        if (isset($config['pesonalAccessToken'])) {
+            $this->personal_access_token = $config['pesonalAccessToken'];
         } else {
-            $this->personal_access_token = config('infusionsoft.personal_access_token');
+            $this->personal_access_token = config('infusionsoft.personalAccessToken');
         }
     }
 

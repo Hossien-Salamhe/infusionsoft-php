@@ -237,7 +237,7 @@ Set your env variables
 ```
 INFUSIONSOFT_CLIENT_ID=xxxxxxxx
 INFUSIONSOFT_SECRET=xxxxxxxx
-INFUSIONSOFT_PERSONAL_ACCESS_CONTROLER=KeapAK-xxxxxxxxxx
+INFUSIONSOFT_PERSONAL_ACCESS_TOKEN=KeapAK-xxxxxxxxxx
 INFUSIONSOFT_REDIRECT_URL=http://localhost/auth/callback
 ```
 
@@ -262,7 +262,7 @@ Set your env variables (make sure you're loading your env file in app.php)
 ```
 INFUSIONSOFT_CLIENT_ID=xxxxxxxx
 INFUSIONSOFT_SECRET=xxxxxxxx
-INFUSIONSOFT_PERSONAL_ACCESS_CONTROLER=KeapAK-xxxxxxxxxx
+INFUSIONSOFT_PERSONAL_ACCESS_TOKEN=KeapAK-xxxxxxxxxx
 INFUSIONSOFT_REDIRECT_URL=http://localhost/auth/callback
 ```
 
