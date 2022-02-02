@@ -8,6 +8,8 @@
 ## Version Notes
 
 This version implements RESTful endpoints, a new version of Guzzle, and a restructured request handler.
+work with personal access controller
+work with X-Keap-API-Key
 
 As of version 1.4, PHP 7+ is required.
 
@@ -257,6 +259,7 @@ Set your env variables (make sure you're loading your env file in app.php)
 ```
 INFUSIONSOFT_CLIENT_ID=xxxxxxxx
 INFUSIONSOFT_SECRET=xxxxxxxx
+INFUSIONSOFT_PERSONAL_ACCESS_CONTROLER=KeapAK-xxxxxxxxxx
 INFUSIONSOFT_REDIRECT_URL=http://localhost/auth/callback
 ```
 
