@@ -57,6 +57,7 @@ class TagService extends RestModel
         $contacts      = new \stdClass();
         $contacts->ids = $contactIds;
 
+        dd($this->id, $contactIds,  $contacts->ids);
         $response = $this->client->restfulRequest('post', $this->getFullUrl($this->id . '/contacts'), $contacts);
 
         return $response;

@@ -6,7 +6,8 @@ use Infusionsoft\Api\Rest\Traits\CannotModel;
 use Infusionsoft\Api\Rest\Traits\CannotSave;
 use Infusionsoft\Api\Rest\Traits\CannotSync;
 
-class CustomFieldService extends RestModel {
+class CustomFieldService extends RestModel
+{
 
     use CannotDelete, CannotSync, CannotSave, CannotCreate, CannotModel;
 

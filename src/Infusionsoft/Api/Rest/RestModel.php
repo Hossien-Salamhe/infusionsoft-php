@@ -92,7 +92,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Create a new model instance.
      *
-     * @param  array $attributes
+     * @param array $attributes
      *
      * @return self
      */
@@ -156,7 +156,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Mock this model from itself.
      *
-     * @param  array $attributes
+     * @param array $attributes
      *
      * @return self
      */
@@ -170,7 +170,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Creates a new object and saves it in storage/API.
      *
-     * @param  array $attributes
+     * @param array $attributes
      *
      * @return self
      */
@@ -267,7 +267,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
 
         $params = $this->where;
         if (!empty($this->optionalProperities)) {
-          $params['optional_properties'] = implode(',', $this->optionalProperities);
+            $params['optional_properties'] = implode(',', $this->optionalProperities);
         }
 
         if (!empty($this->where)) {
@@ -294,7 +294,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
 
         $params = $this->where;
         if (!empty($this->optionalProperities)) {
-          $params['optional_properties'] = implode(',', $this->optionalProperities);
+            $params['optional_properties'] = implode(',', $this->optionalProperities);
         }
 
         if (!empty($params)) {
@@ -343,13 +343,13 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
         return $collection;
     }
 
-	public function model()
-	{
-		$data = $this->client->restfulRequest('get', $this->getFullUrl('model'));
-		$this->fill($data);
+    public function model()
+    {
+        $data = $this->client->restfulRequest('get', $this->getFullUrl('model'));
+        $this->fill($data);
 
-		return $this;
-	}
+        return $this;
+    }
 
 
     public function collect(array $array, $cursor = [])
@@ -415,7 +415,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Fill the model with an array of attributes.
      *
-     * @param  array $attributes
+     * @param array $attributes
      *
      * @return self
      */
@@ -431,8 +431,8 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Create a new instance of the given model.
      *
-     * @param  array $attributes
-     * @param  bool $exists
+     * @param array $attributes
+     * @param bool $exists
      *
      * @return self
      */
@@ -446,7 +446,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Create a collection of models from plain arrays.
      *
-     * @param  array $items
+     * @param array $items
      *
      * @return array
      */
@@ -508,7 +508,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Set the hidden attributes for the model.
      *
-     * @param  array $hidden
+     * @param array $hidden
      *
      * @return void
      */
@@ -520,7 +520,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Add hidden attributes for the model.
      *
-     * @param  array|string|null $attributes
+     * @param array|string|null $attributes
      *
      * @return void
      */
@@ -544,7 +544,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Set the visible attributes for the model.
      *
-     * @param  array $visible
+     * @param array $visible
      *
      * @return void
      */
@@ -556,7 +556,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Add visible attributes for the model.
      *
-     * @param  array|string|null $attributes
+     * @param array|string|null $attributes
      *
      * @return void
      */
@@ -570,7 +570,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Set the accessors to append to model arrays.
      *
-     * @param  array $appends
+     * @param array $appends
      *
      * @return void
      */
@@ -582,7 +582,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Convert the model instance to JSON.
      *
-     * @param  int $options
+     * @param int $options
      *
      * @return string
      */
@@ -681,7 +681,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Get an attribute array of all arrayable values.
      *
-     * @param  array $values
+     * @param array $values
      *
      * @return array
      */
@@ -697,7 +697,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Get an attribute from the model.
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return mixed
      */
@@ -716,7 +716,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Get a plain attribute (not a relationship).
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return mixed
      */
@@ -744,7 +744,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Get an attribute from the $attributes array.
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return mixed
      */
@@ -758,7 +758,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Determine if a get mutator exists for an attribute.
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return bool
      */
@@ -770,8 +770,8 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Get the value of an attribute using its mutator.
      *
-     * @param  string $key
-     * @param  mixed $value
+     * @param string $key
+     * @param mixed $value
      *
      * @return mixed
      */
@@ -783,8 +783,8 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Get the value of an attribute using its mutator for array conversion.
      *
-     * @param  string $key
-     * @param  mixed $value
+     * @param string $key
+     * @param mixed $value
      *
      * @return mixed
      */
@@ -798,7 +798,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Determine whether an attribute should be casted to a native type.
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return bool
      */
@@ -810,7 +810,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Determine whether a value is JSON castable for inbound manipulation.
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return bool
      */
@@ -826,7 +826,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Get the type of cast for a model attribute.
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return string
      */
@@ -838,8 +838,8 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Cast an attribute to a native PHP type.
      *
-     * @param  string $key
-     * @param  mixed $value
+     * @param string $key
+     * @param mixed $value
      *
      * @return mixed
      */
@@ -875,8 +875,8 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Set a given attribute on the model.
      *
-     * @param  string $key
-     * @param  mixed $value
+     * @param string $key
+     * @param mixed $value
      *
      * @return void
      */
@@ -901,7 +901,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Determine if a set mutator exists for an attribute.
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return bool
      */
@@ -978,7 +978,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Dynamically retrieve attributes on the model.
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return mixed
      */
@@ -990,8 +990,8 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Dynamically set attributes on the model.
      *
-     * @param  string $key
-     * @param  mixed $value
+     * @param string $key
+     * @param mixed $value
      *
      * @return void
      */
@@ -1003,7 +1003,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Determine if the given attribute exists.
      *
-     * @param  mixed $offset
+     * @param mixed $offset
      *
      * @return bool
      */
@@ -1015,7 +1015,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Get the value for a given offset.
      *
-     * @param  mixed $offset
+     * @param mixed $offset
      *
      * @return mixed
      */
@@ -1027,8 +1027,8 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Set the value for a given offset.
      *
-     * @param  mixed $offset
-     * @param  mixed $value
+     * @param mixed $offset
+     * @param mixed $value
      *
      * @return void
      */
@@ -1040,7 +1040,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Unset the value for a given offset.
      *
-     * @param  mixed $offset
+     * @param mixed $offset
      *
      * @return void
      */
@@ -1052,7 +1052,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Determine if an attribute exists on the model.
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return void
      */
@@ -1064,7 +1064,7 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Unset an attribute on the model.
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return void
      */
@@ -1076,8 +1076,8 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     /**
      * Handle dynamic static method calls into the method.
      *
-     * @param  string $method
-     * @param  array $parameters
+     * @param string $method
+     * @param array $parameters
      *
      * @return mixed
      */
