@@ -8,7 +8,9 @@ class ContactService extends RestModel
 {
     use CannotSync;
 
+    public $base_url = 'https://api.infusionsoft.com/crm/rest/v1';
     public $full_url = 'https://api.infusionsoft.com/crm/rest/v1/contacts';
+    public $full_v2_url = 'https://api.infusionsoft.com/crm/rest/v2/contacts';
 
     protected $updateVerb = 'patch';
 
@@ -82,6 +84,13 @@ class ContactService extends RestModel
 
     }
 
+    public function removeTag($tagId)
+    {
+        $response = $this->client->restfulRequest('delete', $this->base_url . "/tags/$tagId/contacts/$this->id");
+        return $response;
+
+    }
+
     public function creditCards()
     {
         $data = $this->client->restfulRequest('get', $this->getFullUrl($this->id . '/creditCards'));
@@ -99,5 +108,21 @@ class ContactService extends RestModel
         $response = $this->client->restfulRequest('post', $this->getFullUrl($this->id . '/creditCards'), $cardDetails);
 
         return $response;
+    }
+
+    /**
+     * @param integer $contactId
+     * @param array $data
+     */
+    public function update($contactId, $attributes)
+    {
+
+        $this->mock($attributes);
+
+        $data = $this->client->restfulRequest('patch', $this->getFullV2Url($contactId), (array)$this->toArray());
+
+        $this->fill($data);
+
+        return $this;
     }
 }

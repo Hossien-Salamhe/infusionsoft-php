@@ -72,4 +72,10 @@ class TagService extends RestModel
         return $response;
     }
 
+    public function filtterByName($name)
+    {
+        $response = $this->client->restfulRequest('get', "https://api.infusionsoft.com/crm/rest/v2/tags?filter=name%3D%3D$name");
+        return $response;
+
+    }
 }

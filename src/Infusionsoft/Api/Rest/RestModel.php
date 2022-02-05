@@ -27,6 +27,12 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
 
     protected $return_key = null;
 
+    protected $allowed_type_of_new_field = [
+        'Currency', 'Date', 'DateTime', 'DayOfWeek', 'Drilldown', 'Email', 'Month', 'ListBox', 'Name', 'WholeNumber',
+        'DecimalNumber', 'Percent', 'PhoneNumber', 'Radio', 'Dropdown', 'SocialSecurityNumber', 'State', 'Text',
+        'TextArea', 'User', 'UserListBox', 'Website', 'Year', 'YesNo'
+    ];
+
     /**
      * The model's attributes.
      *
@@ -105,6 +111,25 @@ abstract class RestModel implements ArrayAccess, JsonSerializable
     public function getFullUrl($additional = null)
     {
         $url = $this->full_url;
+        if (substr($url, -1) != '/') {
+            $url .= '/';
+        }
+
+        if ($additional) {
+            $additional = ltrim($additional, '/');
+        }
+
+        return $url . $additional;
+    }
+
+    /**
+     * Returns the full URL for the query, optionally concatinated with additional URI elements
+     *
+     * @return string
+     */
+    public function getFullV2Url($additional = null)
+    {
+        $url = $this->full_v2_url;
         if (substr($url, -1) != '/') {
             $url .= '/';
         }
